@@ -1,6 +1,5 @@
 from parsing import *
 import random
-import numpy as np
 
 
 def generation():
@@ -24,39 +23,11 @@ def generation():
                       / (used_elements[0]['удельная теплоемкость']*used_elements[0]['масса']
                        + used_elements[1]['удельная теплоемкость']*used_elements[1]['масса'])
     used_elements.append({'финальная темпиратупа': final_temperature})
-    return used_elements
-
-
-x_train = []
-x_test = []
-y_train = []
-y_test = []
-count = 0
-
-for cicle in range(10000):
-    count += 1
     a = []
-    for x in generation():
+    for x in used_elements:
         for y in x.values():
             element = y
             a.append(element)
-    if count < 5:
-        x_train.append(a[:-1])
-        y_train.append(a[-1:])
-    else:
-        x_test.append((a[:-1]))
-        y_test.append(a[-1:])
-        count = 0
+    return used_elements
 
-x_train = np.array(x_train)
-x_test = np.array(x_test)
-y_train = np.array(y_train)
-y_test = np.array(y_test)
-
-print(x_train)
-print('===================================================================================================================================================')
-print(x_test)
-print('===================================================================================================================================================')
-print(y_train)
-print('===================================================================================================================================================')
-print(y_test)
+print(generation())
