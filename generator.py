@@ -33,7 +33,7 @@ y_train = []
 y_test = []
 count = 0
 
-for cicle in range(5):
+for cicle in range(10000):
     count += 1
     a = []
     for x in generation():
@@ -51,7 +51,7 @@ for cicle in range(5):
 x_train = np.array(x_train)
 x_test = np.array(x_test)
 y_train = np.array(y_train)
-y_test = np.array(x_test)
+y_test = np.array(y_test)
 
 print(x_train)
 print('===================================================================================================================================================')
