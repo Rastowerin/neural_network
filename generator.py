@@ -3,31 +3,17 @@ import random
 
 
 def generation():
+    indexing = lambda x, y: 5 * x + y
     used_elements = []
     for element in range(2):
-        used_elements.append(elements[list(elements)[random.randint(0, len(elements) - 1)]])
-        y = 0
-        for x in used_elements[element].keys():
-            y += 1
-            if y == 2:
-                z = x
-        used_elements[element].setdefault('темпиратура', float(random.randint(-100, int(used_elements[element][z]))))
-        y = 0
-        for x in used_elements[element].keys():
-            y += 1
-            if y == 2:
-                z = x
-        used_elements[element].setdefault('масса', float(random.randint(1, 100)))
-    final_temperature = (used_elements[0]['удельная теплоемкость']*used_elements[0]['масса']*used_elements[0]['темпиратура']
-                       + used_elements[1]['удельная теплоемкость']*used_elements[1]['масса']*used_elements[1]['темпиратура'])\
-                      / (used_elements[0]['удельная теплоемкость']*used_elements[0]['масса']
-                       + used_elements[1]['удельная теплоемкость']*used_elements[1]['масса'])
-    used_elements.append({'финальная темпиратупа': final_temperature})
-    a = []
-    for x in used_elements:
-        for y in x.values():
-            element = y
-            a.append(element)
+        used_elements.extend(elements[list(elements)[random.randint(0, len(elements) - 1)]])
+        used_elements.append(float(random.randint(-100, int(used_elements[indexing(element, 1)]))))
+        used_elements.append(float(random.randint(1, 100)))
+        parameter_x = 0
+        parameter_y = 0
+    for element_number in range(len(used_elements)//5):
+        parameter_x += used_elements[indexing(element_number, 0)]*used_elements[indexing(element_number, 4)]*used_elements[indexing(element_number, 3)]
+        parameter_y += used_elements[indexing(element_number, 0)]*used_elements[indexing(element_number, 4)]
+    final_temperature = parameter_x/parameter_y
+    used_elements.append(final_temperature)
     return used_elements
-
-print(generation())
